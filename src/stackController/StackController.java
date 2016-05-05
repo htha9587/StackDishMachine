@@ -47,7 +47,7 @@ public  class StackController
 	{
 		first = null;
 		N = 0;
-		baseModel = new StackModel();
+		baseModel = new StackModel(N);
 		baseFrame = new StackFrame(this);
 		
 	}
@@ -97,7 +97,7 @@ public  class StackController
 //		return item;
 //	}
 //	/**
-//	 * Checks stack for erros.
+//	 * Checks stack for errors.
 //	 * @return
 //	 */
 //	public Item peek()
