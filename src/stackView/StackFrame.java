@@ -8,8 +8,10 @@ package stackView;
  */
 
 import javax.swing.*;
+
 import java.*;
 import java.awt.*;
+
 import stackController.*;
 
 public class StackFrame extends JFrame
@@ -17,13 +19,25 @@ public class StackFrame extends JFrame
 	private StackController baseController;
 	private StackPanel basePanel;
 	
-	public StackFrame(StackController baseController)
+	
+	/**
+	 * Constructor for JFrame.
+	 * @param drawController
+	 */
+	public StackFrame(StackController drawController)
 	{
-		this.baseController = baseController;
-		basePanel = new StackPanel(baseController);
+		this.baseController = drawController;
+		basePanel = new StackPanel(drawController);
 		setUpFrame();
 	}
 
+	
+
+	
+	/**
+	 * Sets the frame.
+	 */
+	
 	private void setUpFrame() 
 	{
 		this.setContentPane(basePanel);
