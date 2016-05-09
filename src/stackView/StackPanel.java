@@ -59,7 +59,6 @@ public class StackPanel extends JPanel
 		StackLabel = new JLabel("StackDishMachine");
 		setSize = new JButton("Set size");
 		baseLayout.putConstraint(SpringLayout.WEST, setSize, 168, SpringLayout.WEST, this);
-		
 		StackPanel = new JPanel();
 		setBackground(Color.magenta);
 		setUpPanel();
@@ -79,7 +78,6 @@ public class StackPanel extends JPanel
 		this.add(setSize);
 		//this.add(StackTable);
 		JLabel StackLabel = new JLabel("StackDishMachine");
-		baseLayout.putConstraint(SpringLayout.WEST, StackLabel, 10, SpringLayout.WEST, this);
 		StackLabel.setFont(new Font("Shree Devanagari 714", Font.BOLD, 20));
 		add(StackLabel);
 		StackTable = new JTable();
@@ -87,31 +85,18 @@ public class StackPanel extends JPanel
 		StackTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		StackTable.setColumnSelectionAllowed(true);
 		StackTable.setCellSelectionEnabled(true);
-		baseLayout.putConstraint(SpringLayout.NORTH, StackTable, 170, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, StackTable, 284, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, StackTable, -236, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, StackTable, -304, SpringLayout.EAST, this);
 		StackTable.setForeground(Color.LIGHT_GRAY);
 		StackTable.setBackground(new Color(0, 128, 0));
 		add(StackTable);
-		
 		SizeField = new JTextField();
 		PopField = new JTextField();
 		PopField.setColumns(10);
-		baseLayout.putConstraint(SpringLayout.NORTH, SizeField, 0, SpringLayout.NORTH, setSize);
-		baseLayout.putConstraint(SpringLayout.WEST, SizeField, 3, SpringLayout.EAST, setSize);
 		add(SizeField);
 		SizeField.setColumns(10);
-		
 		PushField = new JTextField();
-		baseLayout.putConstraint(SpringLayout.NORTH, PushField, -1, SpringLayout.NORTH, Push);
-		baseLayout.putConstraint(SpringLayout.WEST, PushField, 6, SpringLayout.EAST, Push);
 		add(PushField);
 		PushField.setColumns(10);
-		
 		PopFIeld = new JTextField();
-		baseLayout.putConstraint(SpringLayout.SOUTH, PopFIeld, 0, SpringLayout.SOUTH, Pop);
-		baseLayout.putConstraint(SpringLayout.EAST, PopFIeld, 0, SpringLayout.EAST, SizeField);
 		add(PopFIeld);
 		PopFIeld.setColumns(10);
 	}
@@ -138,6 +123,17 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.NORTH, Pop, 6, SpringLayout.SOUTH, Push);
 		baseLayout.putConstraint(SpringLayout.WEST, Pop, 0, SpringLayout.WEST, Push);
 		baseLayout.putConstraint(SpringLayout.SOUTH, setSize, -6, SpringLayout.NORTH, Push);
+		baseLayout.putConstraint(SpringLayout.SOUTH, PopFIeld, 0, SpringLayout.SOUTH, Pop);
+		baseLayout.putConstraint(SpringLayout.EAST, PopFIeld, 0, SpringLayout.EAST, SizeField);
+		baseLayout.putConstraint(SpringLayout.NORTH, PushField, -1, SpringLayout.NORTH, Push);
+		baseLayout.putConstraint(SpringLayout.WEST, PushField, 6, SpringLayout.EAST, Push);
+		baseLayout.putConstraint(SpringLayout.NORTH, SizeField, 0, SpringLayout.NORTH, setSize);
+		baseLayout.putConstraint(SpringLayout.WEST, SizeField, 3, SpringLayout.EAST, setSize);
+		baseLayout.putConstraint(SpringLayout.NORTH, StackTable, 170, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, StackTable, 284, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, StackTable, -236, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, StackTable, -304, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, StackLabel, 10, SpringLayout.WEST, this);
 	}
 	
 	/**
@@ -177,6 +173,7 @@ public class StackPanel extends JPanel
 				{
 					
 				}
+				
 				}
 				
 			}
