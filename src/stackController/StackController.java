@@ -8,7 +8,9 @@ package stackController;
 
 import java.util.*;
 import java.awt.*;
-import stackController.ListIterator;
+
+import stackModel.Customer;
+import stackModel.Dish;
 import stackModel.StackModel;
 import stackView.StackFrame;
 import stackView.StackPanel;
@@ -20,9 +22,26 @@ public  class StackController
 
 	private Queue<Customer> customerQueue;
 	private Stack<Dish> dishes;
+	private StackFrame baseFrame;
+	private StackModel baseModel;
+	private StackPanel basePanel;
 	
+
 	
+	public StackController()
+	{
+		baseFrame = new StackFrame(this);
+		baseModel = new StackModel(0);
+	}
 	
+	public StackFrame getBaseFrame() {
+		return baseFrame;
+	}
+
+	public void setBaseFrame(StackFrame baseFrame) {
+		this.baseFrame = baseFrame;
+	}
+
 	public void start()
 	{
 		doStuffToDishes();
@@ -39,7 +58,8 @@ public  class StackController
 	
 	private void useTheCustomerQueue()
 	{
-		customerQueue = new LinkedList<Customer>(false, "", 3234.3));
+		customerQueue = new LinkedList<Customer>();
+		customerQueue.add(new Customer(false, "", 3234.3));
 		customerQueue.remove();
 	}
 	

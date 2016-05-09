@@ -133,7 +133,7 @@ public class StackModel
 		return new String(s);
 	}
 	/**
-	 * Gets status of stack to display.
+	 * Gets status of stack to display.$
 	 * @return
 	 */
 	public String getStatus()

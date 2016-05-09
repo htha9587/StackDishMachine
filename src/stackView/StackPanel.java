@@ -41,8 +41,7 @@ public class StackPanel extends JPanel
 	private JTextField SizeField;
 	private JTextField PushField;
 	private JTextField PopField;
-	private JScrollPane StackPane;
-	private JTextField PopField_1;
+	private JTextField PopFIeld;
 	
 	/**
 	 * Constructor for JPanel.
@@ -57,7 +56,6 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, Push, 157, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, Push, -56, SpringLayout.SOUTH, this);
 		Pop = new JButton("Pop Stack");
-		StackPane = new JScrollPane();
 		StackLabel = new JLabel("StackDishMachine");
 		setSize = new JButton("Set size");
 		baseLayout.putConstraint(SpringLayout.WEST, setSize, 168, SpringLayout.WEST, this);
@@ -79,9 +77,9 @@ public class StackPanel extends JPanel
 		this.add(Push);
 		this.add(Pop);
 		this.add(setSize);
-		this.add(StackTable);
-		this.add(StackPane);
+		//this.add(StackTable);
 		JLabel StackLabel = new JLabel("StackDishMachine");
+		baseLayout.putConstraint(SpringLayout.WEST, StackLabel, 10, SpringLayout.WEST, this);
 		StackLabel.setFont(new Font("Shree Devanagari 714", Font.BOLD, 20));
 		add(StackLabel);
 		StackTable = new JTable();
@@ -111,11 +109,11 @@ public class StackPanel extends JPanel
 		add(PushField);
 		PushField.setColumns(10);
 		
-		PopField_1 = new JTextField();
-		baseLayout.putConstraint(SpringLayout.SOUTH, PopField_1, 0, SpringLayout.SOUTH, Pop);
-		baseLayout.putConstraint(SpringLayout.EAST, PopField_1, -10, SpringLayout.EAST, PushField);
-		add(PopField_1);
-		PopField_1.setColumns(10);
+		PopFIeld = new JTextField();
+		baseLayout.putConstraint(SpringLayout.SOUTH, PopFIeld, 0, SpringLayout.SOUTH, Pop);
+		baseLayout.putConstraint(SpringLayout.EAST, PopFIeld, 0, SpringLayout.EAST, SizeField);
+		add(PopFIeld);
+		PopFIeld.setColumns(10);
 	}
 	
 	/**
@@ -160,7 +158,6 @@ public class StackPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				Stack a;
-				a.push(PushField.getText());
 				PushField.setText("");
 				refresh();
 				
@@ -168,17 +165,7 @@ public class StackPanel extends JPanel
 
 			private void refresh() 
 			{
-				Object a;
-				Object[] q = a.update();
-				int size;
-				for(int i=0; i<=size;i++)
-				{
-					StackTable.setValueAt("", i, 0);
-				}
-				for(int i = 0;i<=a.SC-1;i++)
-				{
-					StackTable.setValueAt(q[i].toString(), i, 0);
-				}
+				
 			}
 		});
 		
@@ -203,34 +190,9 @@ public class StackPanel extends JPanel
 		{
 		public void actionPerformed(ActionEvent click)
 		{
-			int p = 0;
-			try
-			{
-				p = Integer.parseInt(SizeField.getText());
-				if(p!=0 && p<100)
-				{
-					size=p;
-					a = new Stack(p);
-					dataModel = new StackModel();
-					StackModel.addColumn("Stack         Size:" +p);
-					for(int i= 0; i<=p; i++)
-					{
-						StackModel.addRow(new Object[]{""});
-						
-					}
-					StackTable.setModel(dataModel);
-				}
-				
-			}
-			catch
 			
-				(NumberFormatException numberFormatException)
-				{
-					
-				}
-			}
 
-		
+		}
 	});
 		
 		
