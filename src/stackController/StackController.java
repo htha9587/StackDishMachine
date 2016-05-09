@@ -18,100 +18,29 @@ import javax.xml.soap.Node;
 public  class StackController
 {
 
-	private int N;
-	private Node first;
-	private StackPanel basePanel;
-	private StackFrame baseFrame;
-	private StackModel baseModel;
-	public class Node
-	{
-		Item item;
-		Node next;
-	}
-	
-	public StackFrame getBaseFrame()
-	{
-		return baseFrame;
-	}
-	
-	public void setBaseFrame(StackFrame baseFrame) {
-		this.baseFrame = baseFrame;
-	}
-	
-	
-	/**
-	 * Initializes empty stack.
-	 */
-	
-	public StackController()
-	{
-		first = null;
-		N = 0;
-		baseModel = new StackModel(N);
-		baseFrame = new StackFrame(this);
-		
-	}
-	
-//	/**
-//	 * Returns true if Stack is dirty, false if not.
-//	 */
-//	
-//	public boolean isDirty()
-//	{
-//		return first == null;
-//	}
-//	
-//	/**
-//	 * Returns radius of dish.
-//	 * @return
-//	 */
-//	
-//	public int radius()
-//	{
-//		return N;
-//	}
-//	
-//	/**
-//	 * Adds item to stack.
-//	 */
-//	
-//	public void push(Item item)
-//	{
-//		Node firstDish = first;
-//		first = new Node();
-//		first.item = item;
-//		first.next = firstDish;
-//		N++;
-//	}
-//	
-//	/**
-//	 * Removes item from stack.
-//	 * @return
-//	 */
-//	public Item pop()
-//	{
-//		if(isEmpty()) throw new NoSuchElementException("Stack Underflow!");
-//		Item item = first.item;
-//		first = first.next;
-//		N--;
-//		return item;
-//	}
-//	/**
-//	 * Checks stack for errors.
-//	 * @return
-//	 */
-//	public Item peek()
-//	{
-//		if(isEmpty()) throw new NoSuchElementException("Stack Underflow");
-//		return first.item;
-//	}
-
+	private Queue<Customer> customerQueue;
+	private Stack<Dish> dishes;
 	
 	
 	
 	public void start()
 	{
-		
+		doStuffToDishes();
+		useTheCustomerQueue();
+	}
+	
+	private void doStuffToDishes()
+	{
+		dishes = new Stack<Dish>();
+		dishes.add(new Dish(true, java.awt.Color.BLACK, 8));
+		dishes.pop();
+		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
+	}
+	
+	private void useTheCustomerQueue()
+	{
+		customerQueue = new LinkedList<Customer>(false, "", 3234.3));
+		customerQueue.remove();
 	}
 	
 	

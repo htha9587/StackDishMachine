@@ -13,13 +13,18 @@ import java.util.*;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 
 import stackController.StackController;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 
 public class StackPanel extends JPanel
@@ -35,6 +40,9 @@ public class StackPanel extends JPanel
 	private JTable StackTable;
 	private JTextField SizeField;
 	private JTextField PushField;
+	private JTextField PopField;
+	private JScrollPane StackPane;
+	private JTextField PopField_1;
 	
 	/**
 	 * Constructor for JPanel.
@@ -49,6 +57,7 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, Push, 157, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, Push, -56, SpringLayout.SOUTH, this);
 		Pop = new JButton("Pop Stack");
+		StackPane = new JScrollPane();
 		StackLabel = new JLabel("StackDishMachine");
 		setSize = new JButton("Set size");
 		baseLayout.putConstraint(SpringLayout.WEST, setSize, 168, SpringLayout.WEST, this);
@@ -71,19 +80,26 @@ public class StackPanel extends JPanel
 		this.add(Pop);
 		this.add(setSize);
 		this.add(StackTable);
+		this.add(StackPane);
 		JLabel StackLabel = new JLabel("StackDishMachine");
 		StackLabel.setFont(new Font("Shree Devanagari 714", Font.BOLD, 20));
 		add(StackLabel);
 		StackTable = new JTable();
+		StackTable.setToolTipText("");
+		StackTable.setBorder(new LineBorder(new Color(0, 0, 0)));
+		StackTable.setColumnSelectionAllowed(true);
+		StackTable.setCellSelectionEnabled(true);
 		baseLayout.putConstraint(SpringLayout.NORTH, StackTable, 170, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, StackTable, 284, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, StackTable, -236, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, StackTable, -304, SpringLayout.EAST, this);
-		StackTable.setForeground(new Color(0, 100, 0));
+		StackTable.setForeground(Color.LIGHT_GRAY);
 		StackTable.setBackground(new Color(0, 128, 0));
 		add(StackTable);
 		
 		SizeField = new JTextField();
+		PopField = new JTextField();
+		PopField.setColumns(10);
 		baseLayout.putConstraint(SpringLayout.NORTH, SizeField, 0, SpringLayout.NORTH, setSize);
 		baseLayout.putConstraint(SpringLayout.WEST, SizeField, 3, SpringLayout.EAST, setSize);
 		add(SizeField);
@@ -94,6 +110,12 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, PushField, 6, SpringLayout.EAST, Push);
 		add(PushField);
 		PushField.setColumns(10);
+		
+		PopField_1 = new JTextField();
+		baseLayout.putConstraint(SpringLayout.SOUTH, PopField_1, 0, SpringLayout.SOUTH, Pop);
+		baseLayout.putConstraint(SpringLayout.EAST, PopField_1, -10, SpringLayout.EAST, PushField);
+		add(PopField_1);
+		PopField_1.setColumns(10);
 	}
 	
 	/**
@@ -137,7 +159,26 @@ public class StackPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
+				Stack a;
+				a.push(PushField.getText());
+				PushField.setText("");
+				refresh();
 				
+			}
+
+			private void refresh() 
+			{
+				Object a;
+				Object[] q = a.update();
+				int size;
+				for(int i=0; i<=size;i++)
+				{
+					StackTable.setValueAt("", i, 0);
+				}
+				for(int i = 0;i<=a.SC-1;i++)
+				{
+					StackTable.setValueAt(q[i].toString(), i, 0);
+				}
 			}
 		});
 		
@@ -146,16 +187,52 @@ public class StackPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				
+				{
+					
+				}
+				}
+				
 			}
-		});
+		);
+		
+		
+		
+		
 		
 		setSize.addActionListener(new ActionListener()
 		{
 		public void actionPerformed(ActionEvent click)
 		{
+			int p = 0;
+			try
+			{
+				p = Integer.parseInt(SizeField.getText());
+				if(p!=0 && p<100)
+				{
+					size=p;
+					a = new Stack(p);
+					dataModel = new StackModel();
+					StackModel.addColumn("Stack         Size:" +p);
+					for(int i= 0; i<=p; i++)
+					{
+						StackModel.addRow(new Object[]{""});
+						
+					}
+					StackTable.setModel(dataModel);
+				}
+				
+			}
+			catch
 			
-		}
+				(NumberFormatException numberFormatException)
+				{
+					
+				}
+			}
+
+		
 	});
+		
 		
 	}
 }
