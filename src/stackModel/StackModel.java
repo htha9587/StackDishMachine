@@ -37,6 +37,11 @@ public class StackModel
 		SS = SC = 0;
 	}
 	
+	/**
+	 * 
+	 * Creates from initialCapcity.
+	 * @param initialCapacity
+	 */
 	public void create(int initialCapacity)
 	{
 		if(initialCapacity < 1)
@@ -46,12 +51,20 @@ public class StackModel
 		SC = 0;
 	}
 	
+	/**
+	 * Checks if dirty.
+	 * @return
+	 */
+	
 	public boolean isDirty()
 	{
 		return (SC == SS);
 	}
 	
-	
+	/**
+	 *  Sets radius of plate as an integer.
+	 * @return
+	 */
 	
 	
 	public int radius()
@@ -59,11 +72,76 @@ public class StackModel
 		return radius;
 	}
 	
-	
+	/**
+	 * Sets color.
+	 * @return
+	 */
 	public Color color()
 	{
 		return color;
 		
 	}
+	/**
+	 * Initializes the stack object.
+	 * @return
+	 */
+	public Object[] update()
+	{
+		return stk;
+	}
+	/**
+	 * Boolean value that pushes stack as an element.
+	 * @param element
+	 * @return
+	 */
+	public boolean push (Object element)
+	{
+		if(SC == SS)
+			return false;
+		
+		stk[SC] = element;
+		SC++;
+		return true;
+	}
+	/**
+	 * Removes from stack.
+	 * @return
+	 */
+	public Object pop()
+	{
+		if(SC == 0)
+			return false;
+		
+		SC--;
+		return stk[SC];
+	}
+	/**
+	 * Prints as a String of text.
+	 */
+	public String toString()
+	{
+		int i;
+		StringBuffer s = new StringBuffer("[");
+		
+		for(i = 0; i < SC; i++)
+			s.append(stk[i].toString()+",");
+		
+		for(;i<SS; i++)
+			s.append("__,");
+		if(SS > 0)s.delete(s.length() -2, s.length());
+		s.append("]");
+		return new String(s);
+	}
+	/**
+	 * Gets status of stack to display.
+	 * @return
+	 */
+	public String getStatus()
+	{
+		StringBuffer s = new StringBuffer("");
+		s.append("SC: "+SC);
+		return new String(s);
+	}
+	
 	
 }
