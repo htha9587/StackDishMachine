@@ -9,7 +9,7 @@ package stackModel;
 
 public class Customer 
 {
-	private boolean hasOrder;
+	public static boolean hasOrder;
 	private String name;
 	private double total;
 	

@@ -21,7 +21,7 @@ public  class StackController
 {
 
 	private Queue<Customer> customerQueue;
-	private Stack<Dish> dishes;
+	public Stack<Dish> dishes;
 	private StackFrame baseFrame;
 	private StackModel baseModel;
 	private StackPanel basePanel;
@@ -30,8 +30,10 @@ public  class StackController
 	
 	public StackController()
 	{
+		dishes = new Stack<Dish>();
+		doStuffToDishes();
 		baseFrame = new StackFrame(this);
-		baseModel = new StackModel(0);
+		baseModel = new StackModel(1);
 	}
 	
 	public StackFrame getBaseFrame() {
@@ -44,15 +46,21 @@ public  class StackController
 
 	public void start()
 	{
-		doStuffToDishes();
+		
 		useTheCustomerQueue();
 	}
 	
 	private void doStuffToDishes()
 	{
-		dishes = new Stack<Dish>();
+		
 		dishes.add(new Dish(true, java.awt.Color.BLACK, 8));
 		dishes.pop();
+		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
+		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
+		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
+		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
+		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
+		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
 		dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
 	}
 	
@@ -63,5 +71,21 @@ public  class StackController
 		customerQueue.remove();
 	}
 	
-	
+	public Dish [] [] getDishStackAsArray()
+	{
+		Dish [] [] convertStack = new Dish[dishes.size()] [1];
+		Queue<Dish> dishQueue = new LinkedList<Dish>();
+		
+		int size = dishes.size();
+		for(int index = 0; index < size; index++)
+		{
+			convertStack[index] [0] = dishes.pop();
+			dishQueue.add(convertStack[index][0]);
+		}
+		for(int index =0; index < convertStack.length; index++)
+		{
+			dishes.push(dishQueue.remove());
+		}
+		return convertStack;
+	}
 }

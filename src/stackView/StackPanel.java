@@ -17,6 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 
 import stackController.StackController;
+import stackModel.Customer;
+import stackModel.Dish;
 
 import javax.swing.JLabel;
 
@@ -25,11 +27,14 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 
 public class StackPanel extends JPanel
 {
+	private Stack dishes;
 	private StackController baseController;
+	private DefaultTableModel model;
 	private JButton Exit;
 	private JButton Push;
 	private JButton Pop;
@@ -38,6 +43,7 @@ public class StackPanel extends JPanel
 	private JLabel StackLabel;
 	private JPanel StackPanel;
 	private JTable StackTable;
+	private JScrollPane StackPane;
 	private JTextField SizeField;
 	private JTextField PushField;
 	private JTextField PopField;
@@ -53,22 +59,37 @@ public class StackPanel extends JPanel
 		baseLayout = new SpringLayout();
 		Exit = new JButton("Exit");
 		Push = new JButton("Push Stack");
+		
 		baseLayout.putConstraint(SpringLayout.WEST, Push, 157, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, Push, -56, SpringLayout.SOUTH, this);
 		Pop = new JButton("Pop Stack");
 		StackLabel = new JLabel("StackDishMachine");
 		setSize = new JButton("Set size");
 		baseLayout.putConstraint(SpringLayout.WEST, setSize, 168, SpringLayout.WEST, this);
-		StackPanel = new JPanel();
+		//StackPanel = new JPanel();
+		//
+		
 		setBackground(Color.magenta);
+		setUpTable();
 		setUpPanel();
 		setUpLayout();
 		setUpListeners();
 		
 	}
-	/**
-	 * Sets the panel.
-	 */
+	
+	private void setUpTable() 
+	{
+		DefaultTableModel dishModel = new DefaultTableModel(baseController.getDishStackAsArray(), new String[]{"Title"});
+		StackTable = new JTable(dishModel);
+		StackPane = new JScrollPane(StackTable);
+		baseLayout.putConstraint(SpringLayout.NORTH, StackPane, 50, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, StackPane, 50, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, StackPane, 180, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, StackPane, -50, SpringLayout.EAST, this);
+	}
+
+	
+	
 	private void setUpPanel()
 	{
 		this.setLayout(baseLayout);
@@ -80,14 +101,14 @@ public class StackPanel extends JPanel
 		JLabel StackLabel = new JLabel("StackDishMachine");
 		StackLabel.setFont(new Font("Shree Devanagari 714", Font.BOLD, 20));
 		add(StackLabel);
-		StackTable = new JTable();
+		
 		StackTable.setToolTipText("");
 		StackTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		StackTable.setColumnSelectionAllowed(true);
 		StackTable.setCellSelectionEnabled(true);
 		StackTable.setForeground(Color.LIGHT_GRAY);
 		StackTable.setBackground(new Color(0, 128, 0));
-		add(StackTable);
+		
 		SizeField = new JTextField();
 		PopField = new JTextField();
 		PopField.setColumns(10);
@@ -99,6 +120,7 @@ public class StackPanel extends JPanel
 		PopFIeld = new JTextField();
 		add(PopFIeld);
 		PopFIeld.setColumns(10);
+		add(StackPane);
 	}
 	
 	/**
@@ -110,16 +132,8 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, StackLabel, 29, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, StackLabel, 33, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, StackLabel, 236, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, StackPanel, 25, SpringLayout.SOUTH, Exit);
-		baseLayout.putConstraint(SpringLayout.WEST, StackPanel, -30, SpringLayout.WEST, Push);
-		baseLayout.putConstraint(SpringLayout.SOUTH, StackPanel, -11, SpringLayout.NORTH, Push);
-		baseLayout.putConstraint(SpringLayout.EAST, StackPanel, -122, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, Exit, 0, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, Exit, -92, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, StackPanel, 6, SpringLayout.SOUTH, Exit);
-		baseLayout.putConstraint(SpringLayout.WEST, StackPanel, -100, SpringLayout.WEST, Push);
-		baseLayout.putConstraint(SpringLayout.SOUTH, StackPanel, -6, SpringLayout.NORTH, Push);
-		baseLayout.putConstraint(SpringLayout.EAST, StackPanel, -74, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, Pop, 6, SpringLayout.SOUTH, Push);
 		baseLayout.putConstraint(SpringLayout.WEST, Pop, 0, SpringLayout.WEST, Push);
 		baseLayout.putConstraint(SpringLayout.SOUTH, setSize, -6, SpringLayout.NORTH, Push);
@@ -135,6 +149,23 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, StackTable, -304, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, StackLabel, 10, SpringLayout.WEST, this);
 	}
+	
+	private void refresh() 
+	// TODO Auto-generated method stub
+{
+
+//Object[] q = Dish.update();
+//
+//for(int i =0;i<=dishes;i++){
+// StackTable.setValueAt(" ", i, 0);
+//    
+//}
+//
+//for(int i =0;i<=Dish.hasOrder-1;i++){
+//    StackTable.setValueAt(q[i].toString(), i, 0);
+//    
+//}
+}
 	
 	/**
 	 * Sets the listeners.
@@ -153,17 +184,15 @@ public class StackPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				Stack a;
+				dishes.push(PushField.getText());
 				PushField.setText("");
 				refresh();
 				
 			}
 
-			private void refresh() 
-			{
-				
-			}
-		});
+			
+		}
+	);
 		
 		Pop.addActionListener(new ActionListener()
 		{
@@ -171,26 +200,52 @@ public class StackPanel extends JPanel
 			{
 				
 				{
-					
+					dishes.pop();
+					//PopField.setText("popped: "+dishes.pop[dishes.pop].toString());
+					refresh();
 				}
 				
 				}
-				
+
+			//
 			}
 		);
 		
 		
-		
-		
-		
+
 		setSize.addActionListener(new ActionListener()
 		{
 		public void actionPerformed(ActionEvent click)
 		{
-			
-
+//			int p =0;
+//			try
+//			{
+//				p = Integer.parseInt(SizeField.getText());
+//				if(p!=0 && p<100)
+//				{
+//					int size = p;
+//					dishes = new Stack(p);
+//					 model = new DefaultTableModel();
+//					model.addColumn("Stack       Size:"+p);
+//					for(int i = 0; i<=p; i++)
+//					{
+//						model.addRow(new Object[]{""});
+//					}
+//					StackTable.setModel(model);
+//				}
+//			}
+//			catch(NumberFormatException numberFormatException)
+//			{
+//				SizeField.setText("Please enter a valid dish Size.");
+//			}
+//			SizeField.setText("");
+//			refresh();
 		}
-	});
+
+		
+	}
+);
+			
 		
 		
 	}

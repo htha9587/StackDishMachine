@@ -1,6 +1,7 @@
 package stackModel;
 
 import java.awt.Color;
+
 import stackController.*;
 /**
  * Version 0.6
@@ -10,6 +11,7 @@ import stackController.*;
 
 public class Dish 
 {
+	public static int hasOrder;
 	private boolean isDirty;
 	private Color color;
 	private int radius;
@@ -50,4 +52,9 @@ public class Dish
 		this.radius = radius;
 	}
 	
+	public static Object[] update()
+	{
+		return null;
+	
+	}
 }
