@@ -11,7 +11,7 @@ import stackController.*;
 
 public class Dish 
 {
-	public static int hasOrder;
+	
 	private boolean isDirty;
 	private Color color;
 	private int radius;

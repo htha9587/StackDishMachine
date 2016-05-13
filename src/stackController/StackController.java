@@ -34,6 +34,7 @@ public  class StackController
 		doStuffToDishes();
 		baseFrame = new StackFrame(this);
 		baseModel = new StackModel(1);
+		
 	}
 	
 	public StackFrame getBaseFrame() {

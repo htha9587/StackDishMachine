@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class StackPanel extends JPanel
 {
-	private Stack dishes;
+	private Stack<Object> dishes;
 	private StackController baseController;
 	private DefaultTableModel model;
 	private JButton Exit;
@@ -59,7 +59,7 @@ public class StackPanel extends JPanel
 		baseLayout = new SpringLayout();
 		Exit = new JButton("Exit");
 		Push = new JButton("Push Stack");
-		
+		dishes = new Stack<Object>();
 		baseLayout.putConstraint(SpringLayout.WEST, Push, 157, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, Push, -56, SpringLayout.SOUTH, this);
 		Pop = new JButton("Pop Stack");
@@ -79,7 +79,7 @@ public class StackPanel extends JPanel
 	
 	private void setUpTable() 
 	{
-		DefaultTableModel dishModel = new DefaultTableModel(baseController.getDishStackAsArray(), new String[]{"Title"});
+		DefaultTableModel dishModel = new DefaultTableModel(baseController.getDishStackAsArray(), new String[]{"Dishes"});
 		StackTable = new JTable(dishModel);
 		StackPane = new JScrollPane(StackTable);
 		baseLayout.putConstraint(SpringLayout.NORTH, StackPane, 50, SpringLayout.NORTH, this);
@@ -154,17 +154,18 @@ public class StackPanel extends JPanel
 	// TODO Auto-generated method stub
 {
 
-//Object[] q = Dish.update();
-//
-//for(int i =0;i<=dishes;i++){
-// StackTable.setValueAt(" ", i, 0);
-//    
-//}
-//
-//for(int i =0;i<=Dish.hasOrder-1;i++){
-//    StackTable.setValueAt(q[i].toString(), i, 0);
-//    
-//}
+Object[] q = dishes.toArray();
+
+
+for(int i =0;i<dishes.size();i++){
+ StackTable.setValueAt(new Dish(false, java.awt.Color.MAGENTA, 54), i, 0);
+
+}
+
+for(int i =0;i<=dishes.size()-1;i++){
+    StackTable.setValueAt(q[i].toString(), i, 0);
+
+}
 }
 	
 	/**
@@ -184,10 +185,10 @@ public class StackPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				dishes.push(PushField.getText());
-				PushField.setText("");
+				dishes.push(StackTable);
+				PushField.setText("Pushed!");
 				refresh();
-				
+				repaint();
 			}
 
 			
@@ -201,8 +202,9 @@ public class StackPanel extends JPanel
 				
 				{
 					dishes.pop();
-					//PopField.setText("popped: "+dishes.pop[dishes.pop].toString());
+					PopFIeld.setText("Popped!");
 					refresh();
+					repaint();
 				}
 				
 				}
@@ -217,29 +219,29 @@ public class StackPanel extends JPanel
 		{
 		public void actionPerformed(ActionEvent click)
 		{
-//			int p =0;
-//			try
-//			{
-//				p = Integer.parseInt(SizeField.getText());
-//				if(p!=0 && p<100)
-//				{
-//					int size = p;
-//					dishes = new Stack(p);
-//					 model = new DefaultTableModel();
-//					model.addColumn("Stack       Size:"+p);
-//					for(int i = 0; i<=p; i++)
-//					{
-//						model.addRow(new Object[]{""});
-//					}
-//					StackTable.setModel(model);
-//				}
-//			}
-//			catch(NumberFormatException numberFormatException)
-//			{
-//				SizeField.setText("Please enter a valid dish Size.");
-//			}
-//			SizeField.setText("");
-//			refresh();
+			int p =0;
+		try
+		{
+				p = Integer.parseInt(SizeField.getText());
+				if(p!=0 && p<100)
+				{
+					 int size = p;
+					dishes = new Stack();
+					 model = new DefaultTableModel();
+					model.addColumn("Stack       Size:"+p);
+					for(int i = 0; i<=p; i++)
+				{
+						model.addRow(new Object[]{dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54))});
+					}
+					StackTable.setModel(model);
+				}
+		}
+			catch(NumberFormatException numberFormatException)
+			{
+				SizeField.setText("Please enter a valid dish Size.");
+			}
+			SizeField.setText("");
+			refresh();
 		}
 
 		
