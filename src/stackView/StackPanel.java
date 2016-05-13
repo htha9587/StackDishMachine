@@ -68,7 +68,7 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, setSize, 168, SpringLayout.WEST, this);
 		//StackPanel = new JPanel();
 		//
-		
+		 model = new DefaultTableModel();
 		setBackground(Color.magenta);
 		setUpTable();
 		setUpPanel();
@@ -86,6 +86,7 @@ public class StackPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, StackPane, 50, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, StackPane, 180, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, StackPane, -50, SpringLayout.EAST, this);
+		model = (DefaultTableModel) StackTable.getModel();
 	}
 
 	
@@ -185,7 +186,9 @@ for(int i =0;i<=dishes.size()-1;i++){
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				dishes.push(StackTable);
+				dishes.push(new Dish(false, java.awt.Color.MAGENTA, 54));
+				Dish[] temp = new Dish [] {new Dish(false, java.awt.Color.MAGENTA, 54)};
+				model.addRow(temp);
 				PushField.setText("Pushed!");
 				refresh();
 				repaint();
@@ -199,18 +202,30 @@ for(int i =0;i<=dishes.size()-1;i++){
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				int p =0;
+				if(dishes.size()>0)
 				{
 					dishes.pop();
 					PopFIeld.setText("Popped!");
-					refresh();
-					repaint();
 				}
 				
+				if(model.getRowCount()>0)
+				{
+					model.removeRow(0);
 				}
-
-			//
+				p = Integer.parseInt(SizeField.getText());
+				if(p!=0 && p<100)
+				{
+					 int size = p;
+					dishes = new Stack();
+					 model = new DefaultTableModel();
+					model.addColumn("Stack       Size:"+p);
+				}
+					refresh();
+					repaint();
 			}
+				
+				}
 		);
 		
 		
